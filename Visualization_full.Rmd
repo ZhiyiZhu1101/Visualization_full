@@ -62,10 +62,29 @@ ggp_nyc_weather #print the plot
 
 ```{r}
 ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
-  geom_point(aes(color = name), alpha = 0.3) +
+  geom_point(aes(color = name), alpha = .3) +
   geom_smooth(se = FALSE)
 
 ```
+
+## Plot with facet
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .3) +
+  geom_smooth(se = FALSE) +
+  facet_grid(. ~name)
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
