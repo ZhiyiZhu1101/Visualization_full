@@ -156,3 +156,89 @@ weather_df |>
 ```
 
 ![](Visualization_full_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+## Hex plot
+
+``` r
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_hex()
+```
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_binhex()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+## Line plot
+
+``` r
+weather_df |>
+  filter(name == "Molokai_HI") |>
+  ggplot(aes(x = date, y = tmax)) +
+  geom_line(alpha = .5) +
+  geom_point(size = .5)
+```
+
+    ## Warning: Removed 1 rows containing missing values (`geom_point()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+
+## Univariate(单变量的) plotting
+
+``` r
+ggplot(weather_df, aes(x = tmax, fill = name)) +
+  geom_histogram(position = "dodge")
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_bin()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+## Using a density plot
+
+``` r
+ggplot(weather_df,aes(x = tmax, fill = name)) +
+  geom_density(alpha = .3, adjust = 2)
+```
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_density()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+## Using boxplot
+
+``` r
+ggplot(weather_df,aes(y = tmax, x = name))+
+  geom_boxplot()
+```
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_boxplot()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+## Using violin plots
+
+``` r
+ggplot(weather_df,aes(y = tmax, x = name))+
+  geom_violin()
+```
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_ydensity()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+## Using ridge plot
+
+``` r
+ggplot(weather_df,aes(x = tmax, y = name))+
+  geom_density_ridges()
+```
+
+    ## Picking joint bandwidth of 1.54
+
+    ## Warning: Removed 17 rows containing non-finite values
+    ## (`stat_density_ridges()`).
+
+![](Visualization_full_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
