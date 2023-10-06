@@ -2,7 +2,7 @@
 title: "Visualization_full"
 author: "Zhiyi Zhu"
 date: "2023-10-03"
-output:github_document
+output: github_document
 ---
 
 ```{r}
@@ -76,7 +76,23 @@ ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
   facet_grid(. ~name)
 ```
 
+## Different plot
 
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) +
+  geom_point(aes(size = prcp), alpha = .3) +
+  geom_smooth() +
+  facet_grid(. ~ name)
+```
+
+### trying assigning a specific color
+
+```{r}
+weather_df |>
+  filter(name == "CentralPark_NY") |>
+  ggplot(aes(x = date, y = tmax)) +
+  geom_point(color = "blue")
+```
 
 
 
