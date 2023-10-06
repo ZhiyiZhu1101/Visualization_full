@@ -58,7 +58,14 @@ ggp_nyc_weather =
 ggp_nyc_weather #print the plot
 ```
 
+## Fancy plot
 
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) +
+  geom_point(aes(color = name), alpha = 0.3) +
+  geom_smooth(se = FALSE)
+
+```
 
 
 
