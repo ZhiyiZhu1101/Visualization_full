@@ -8,6 +8,12 @@ output: github_document
 ```{r}
 library(tidyverse)
 library(ggridges)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
 ```
 
 ## Get the data for the plot
@@ -148,5 +154,35 @@ ggplot(weather_df,aes(y = tmax, x = name))+
 ggplot(weather_df,aes(x = tmax, y = name))+
   geom_density_ridges()
 ```
+
+## Saving and embedding plots
+
+```{r}
+ggplot_weather = 
+  weather_df |>
+  ggplot(aes(x = tmin, y = tmax)) +
+  geom_point()
+
+ggplot_weather
+
+ggsave("results/ggp_weather.pdf", ggplot_weather)
+```
+
+## Change the scale of plot
+
+```{r, fig.width = 12, fig.height = 12}
+ggplot_weather
+```
+
+```{r, fig.width = 12, fig.asp = .6}
+ggplot_weather
+```
+
+
+
+
+
+
+
 
 
