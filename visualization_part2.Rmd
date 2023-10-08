@@ -150,8 +150,23 @@ ggp_tamx_date =
 (ggp_temp_scatter + ggp_prcp_density)/ ggp_tamx_date
 ```
 
+## data manipulation
 
+```{r}
+weather_df |>
+  mutate(
+    name = fct_relevel(name, c("Molokai_HI", "CentralPark_NY", "Waterhole_WA"))
+  ) |>
+  ggplot(aes(x = name, y = tmax)) +
+  geom_boxplot()
 
+weather_df |>
+  mutate(
+    name = fct_reorder(name, tmax)
+  ) |>
+  ggplot(aes(x = name, y = tmax, fill = name)) +
+  geom_violin()
+```
 
 
 
