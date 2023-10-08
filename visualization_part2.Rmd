@@ -75,6 +75,23 @@ weather_df |>
   viridis::scale_color_viridis(discrete = TRUE)
 ```
 
+## Themes
+
+```{r}
+weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5) +
+  labs(
+    title = "Temperature plot",
+    x = "Min daily temp (Degrees C)",
+    y = "Max daily temp (Degrees C)",
+    color = "Location",
+    caption = "Max vs min daily temp in three locations; data from rnoaa"
+  ) +
+  viridis::scale_color_viridis(discrete = TRUE) +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
 
 
 
