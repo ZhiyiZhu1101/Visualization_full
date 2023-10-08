@@ -8,6 +8,7 @@ output: github_document
 ```{r}
 library(tidyverse)
 library(ggridges)
+library(patchwork)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -93,8 +94,61 @@ weather_df |>
   theme(legend.position = "bottom")
 ```
 
+## Data argument
 
+```{r}
+weather_df |> 
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  geom_smooth()
 
+nyc_weather_df = 
+  weather_df |>
+  filter(name =="CentralPark_NY")
+
+hawaii_weather_df = 
+  weather_df |>
+  filter(name =="Molokai_HI")
+
+ggplot(nyc_weather_df, aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  geom_line(data = hawaii_weather_df)
+```
+
+## "patchwork"
+
+```{r}
+weather_df |>
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point() +
+  facet_grid(. ~ name)
+```
+
+## two different plot side-by-side
+
+```{r}
+ggp_temp_scatter =
+  weather_df |>
+  ggplot(aes(x = tmin, y = tmax, color = name)) +
+  geom_point(alpha = .5) +
+  theme(legend.position = "none")
+
+ggp_prcp_density = 
+  weather_df |>
+  filter(prcp > 25) |>
+  ggplot(aes(x = prcp, fill = name)) +
+  geom_density(alpha = .5) +
+  theme(legend.position = "none")
+
+ggp_tamx_date =
+  weather_df |>
+  ggplot(aes(x = date, y = tmax, color = name)) +
+  geom_point(alpha = .5) +
+  geom_smooth(se = FALSE) +
+  theme(legend.position = "bottom")
+
+(ggp_temp_scatter + ggp_prcp_density)/ ggp_tamx_date
+```
 
 
 
